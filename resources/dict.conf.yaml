@@ -1,0 +1,2 @@
+# filter news account
+resources.account.news: "resources/dictionaries/news_account.txt"
