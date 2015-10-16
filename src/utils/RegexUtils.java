@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
@@ -10,12 +12,15 @@ public class RegexUtils {
     private static final Logger LOG = LoggerFactory .getLogger(RegexUtils.class);
     
     private static final String SPACE_EXCEPTIONS = "\\n\\r";
+    
     public static final String SPACE_CHAR_CLASS = "\\p{C}\\p{Z}&&[^"
         + SPACE_EXCEPTIONS + "\\p{Cs}]";
+    
     public static final String SPACE_REGEX = "[" + SPACE_CHAR_CLASS + "]";
 
     public static final String PUNCTUATION_CHAR_CLASS = "\\p{P}\\p{M}\\p{S}"
         + SPACE_EXCEPTIONS;
+    
     public static final String PUNCTUATION_REGEX = "[" + PUNCTUATION_CHAR_CLASS
         + "]";
 
@@ -164,15 +169,14 @@ public class RegexUtils {
      * Main testing Regex
      */
     public static void main(String[] args) {
-        Pattern p = Pattern.compile("\\1{1,}");
-        Matcher m = p.matcher("ccaaaaab");
-        boolean b = m.matches();
+        Matcher m = TOKENIZER_PATTERN.matcher("Haha..3. PartaiSocmed gila! &gt;&gt; PartaiSocmed:Nah,udah tau gila knp "
+        		+ "loe follow😄Bs trsinggung,Bs cuek,Bs justru becanda https://t.co/xjWzqaEuqx");
 
-        // example url
-        if (b) {
-            LOG.info("info :" + b);
-        }else{
-            LOG.info("info :"+ b);
+        List<String> tokens = new ArrayList<>(); 
+        while (m.find()) {
+            tokens.add(m.group());
         }
+        
+        LOG.info(tokens.toString());
     }
 }
